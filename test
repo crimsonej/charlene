@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Hub | Live Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <nav class="p-6 bg-white shadow-sm flex justify-between items-center">
+        <div class="font-bold text-xl text-indigo-600">OUR_PROJECT.</div>
+        <div class="space-x-4 text-sm font-medium hidden md:block">
+            <a href="#" class="hover:text-indigo-600">Features</a>
+            <a href="#" class="hover:text-indigo-600">Timeline</a>
+            <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">View Board</a>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto mt-12 px-6 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+            Building the future <span class="text-indigo-600">together.</span>
+        </h1>
+        <p class="text-lg text-slate-600 mb-8">This is our live workspace. Every update I make on my Parrot machine will appear here for you instantly.</p>
+        
+        <div class="flex flex-col md:flex-row justify-center gap-4">
+            <button class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-indigo-200">Our Ideas</button>
+            <button class="bg-white border border-slate-200 px-8 py-3 rounded-xl font-bold">Project Files</button>
+        </div>
+    </main>
+
+    <section class="max-w-5xl mx-auto mt-20 px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div class="text-2xl mb-2">🎨</div>
+            <h3 class="font-bold mb-1">Design Studio</h3>
+            <p class="text-sm text-slate-500">Live UI/UX updates via Figma integration.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div class="text-2xl mb-2">💻</div>
+            <h3 class="font-bold mb-1">Source Code</h3>
+            <p class="text-sm text-slate-500">Securely hosted and synced with GitHub.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div class="text-2xl mb-2">🚀</div>
+            <h3 class="font-bold mb-1">Live Launch</h3>
+            <p class="text-sm text-slate-500">One-click deployment to the world.</p>
+        </div>
+    </section>
+
+    <footer class="text-center mt-20 py-10 text-slate-400 text-sm">
+        &copy; 2024 Working From The Bowl • Parrot OS & Windows 7
+    </footer>
+</body>
+</html>
