@@ -1153,3 +1153,53 @@ section {
     padding: var(--space-md);
   }
 }
+
+/* ===== Mobile Responsiveness Fixes ===== */
+@media (max-width: 768px) {
+  /* Fix the Header */
+  .header-top-content {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  /* Fix Hero Section */
+  .hero-title {
+    font-size: 2.5rem !important; /* Smaller text for mobile */
+    line-height: 1.1;
+  }
+
+  .hero-buttons {
+    flex-direction: column; /* Stack buttons so they don't squish */
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  /* Fix Grids (About, Services, Mission) */
+  .about-grid, 
+  .services-grid, 
+  .mission-grid, 
+  .footer-grid {
+    grid-template-columns: 1fr !important; /* Force 1 column on mobile */
+    gap: var(--space-lg);
+  }
+
+  /* Fix the logo if it's too big */
+  .logo-img {
+    width: 80% !important; 
+    height: auto !important;
+  }
+  
+  /* Prevent horizontal scrolling */
+  .container {
+    padding: 0 var(--space-sm);
+    overflow-x: hidden;
+  }
+}
