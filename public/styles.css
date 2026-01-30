@@ -165,7 +165,7 @@ input, textarea, select {
 }
 
 /* ===== Welcome Overlay ===== */
-.welcome-overlay {
+/*.welcome-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -289,7 +289,7 @@ input, textarea, select {
   transform: scale(1.05);
   box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
-
+/
 /* ===== Header ===== */
 .header {
   position: fixed;
