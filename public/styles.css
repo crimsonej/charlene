@@ -1,3 +1,15 @@
+
+/* Force content to show */
+#mainContent {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+body {
+    overflow: auto !important;
+}
+
 /* ===== CSS Variables ===== */
 :root {
   /* Colors - Warm earthy palette */
