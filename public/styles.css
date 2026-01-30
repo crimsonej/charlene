@@ -208,8 +208,8 @@ input, textarea, select {
 }
 
 .logo-img {
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 500px;
   object-fit: contain;
   margin: 0 auto;
   animation: logoPulse 2s ease-in-out infinite;
