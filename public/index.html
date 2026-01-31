@@ -17,7 +17,7 @@
       <div class="container header-top-content">
         <div class="contact-info">
           <a href="tel:+995599364433">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
             +995 599 36 44 33
@@ -47,7 +47,6 @@
     <nav class="nav">
       <div class="container nav-content">
         <a href="#" class="nav-logo">
-          <!-- Replace with your logo -->
           <img src="images/logo.png" alt="Logo" class="nav-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="nav-logo-fallback" style="display: none;">
             <span class="nav-logo-icon">&#9670;</span>
@@ -58,6 +57,8 @@
           <li><a href="#home" class="nav-link active">Home</a></li>
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#coffee" class="nav-link">Coffee</a></li>
+          <li><a href="#artists" class="nav-link">Artists</a></li>
           <li><a href="#mission" class="nav-link">Mission</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -72,26 +73,32 @@
 
   <!-- Main Content -->
   <main id="mainContent">
-    <!-- Hero Section -->
+    <!-- Hero Section (Now serves as welcome screen) -->
     <section class="hero" id="home">
       <div class="hero-bg">
         <div class="hero-image-wrapper">
-          <!-- Replace with your hero image -->
           <img src="images/hero-cultural-bridge.jpg" alt="Cultural Bridge" class="hero-image">
         </div>
         <div class="hero-overlay"></div>
       </div>
       <div class="container hero-content">
-        <div class="hero-text reveal-up">
-          <span class="hero-badge">Bridging Two Worlds</span>
-          <h1 class="hero-title">Where African Spirit<br>Meets Georgian Soul</h1>
+        <div class="hero-logo-container">
+          <img src="images/logo2-removebg-preview.png" alt="African-Georgian House" class="hero-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="hero-logo-fallback" style="display: none;">
+            <span class="hero-logo-icon">&#9670;</span>
+          </div>
+        </div>
+        <div class="hero-text">
+          <div class="welcome-badge">Bridging Two Worlds</div>
+          <h1 class="hero-title">African-Georgian House</h1>
+          <p class="hero-tagline">Bridging Cultures, Building Futures</p>
           <p class="hero-description">Empowering connections between Georgia and Africa through trade, cultural exchange, tourism, and artistic collaboration.</p>
           <div class="hero-buttons">
             <a href="#services" class="btn btn-primary">Explore Our Services</a>
             <a href="#contact" class="btn btn-outline">Get In Touch</a>
           </div>
         </div>
-        <div class="hero-stats reveal-up" style="--delay: 0.2s;">
+        <div class="hero-stats">
           <div class="stat">
             <span class="stat-number" data-count="2">0</span>
             <span class="stat-label">Continents United</span>
@@ -115,13 +122,13 @@
     <!-- About Section -->
     <section class="about" id="about">
       <div class="container">
-        <div class="section-header reveal-up">
+        <div class="section-header">
           <span class="section-tag">Our Story</span>
           <h2 class="section-title">Uniting Rich Heritage</h2>
           <p class="section-description">African-Georgian House serves as a cultural and commercial bridge, connecting the vibrant traditions of Uganda and Kenya with the ancient heritage of Georgia.</p>
         </div>
         <div class="about-grid">
-          <div class="about-card reveal-left">
+          <div class="about-card">
             <div class="about-card-image">
               <img src="images/african-safari.jpg" alt="African Landscape">
               <div class="country-flags">
@@ -134,7 +141,7 @@
               <p>The birthplace of humanity, rich in wildlife, artistry, and warm hospitality. From the savannas of Kenya to the pearl of Africa, Uganda.</p>
             </div>
           </div>
-          <div class="about-card reveal-right">
+          <div class="about-card">
             <div class="about-card-image">
               <img src="images/georgian-crafts.jpg" alt="Georgian Culture">
               <div class="country-flags">
@@ -153,13 +160,13 @@
     <!-- Services Section -->
     <section class="services" id="services">
       <div class="container">
-        <div class="section-header reveal-up">
+        <div class="section-header">
           <span class="section-tag">What We Offer</span>
           <h2 class="section-title">Our Services</h2>
           <p class="section-description">From authentic African safaris to handcrafted artworks, discover our curated collection of cultural experiences and products.</p>
         </div>
         <div class="services-grid">
-          <div class="service-card reveal-up" style="--delay: 0s;">
+          <div class="service-card">
             <div class="service-image">
               <img src="images/african-safari.jpg" alt="African Safaris">
               <div class="service-overlay">
@@ -177,7 +184,7 @@
               <p>Experience the magic of Uganda and Kenya with our curated safari adventures. Witness the Big Five and immerse in nature.</p>
             </div>
           </div>
-          <div class="service-card reveal-up" style="--delay: 0.1s;">
+          <div class="service-card">
             <div class="service-image">
               <img src="images/african-handicrafts.jpg" alt="Handicrafts">
               <div class="service-overlay">
@@ -194,7 +201,7 @@
               <p>Authentic African handicrafts, woven baskets, beaded jewelry, and premium leather goods crafted by skilled artisans.</p>
             </div>
           </div>
-          <div class="service-card reveal-up" style="--delay: 0.2s;">
+          <div class="service-card">
             <div class="service-image">
               <img src="images/african-art.jpg" alt="Artworks">
               <div class="service-overlay">
@@ -211,7 +218,7 @@
               <p>Vibrant African paintings and contemporary art pieces that tell stories of culture, tradition, and modern life.</p>
             </div>
           </div>
-          <div class="service-card reveal-up" style="--delay: 0.3s;">
+          <div class="service-card">
             <div class="service-image">
               <img src="images/african-coffee.jpg" alt="African Coffee">
               <div class="service-overlay">
@@ -228,7 +235,7 @@
               <p>Single-origin coffee from Uganda and Kenya's highlands. Rich, aromatic beans roasted to perfection.</p>
             </div>
           </div>
-          <div class="service-card reveal-up" style="--delay: 0.4s;">
+          <div class="service-card">
             <div class="service-image">
               <img src="images/georgian-crafts.jpg" alt="Georgian Crafts">
               <div class="service-overlay">
@@ -245,9 +252,9 @@
               <p>Exquisite cloisonné enamel, traditional pottery, wine accessories, and authentic Georgian artisanal products.</p>
             </div>
           </div>
-          <div class="service-card reveal-up" style="--delay: 0.5s;">
+          <div class="service-card">
             <div class="service-image">
-              <img src="images/hero-cultural-bridge.jpg" alt="Semi-precious Stones">
+              <img src="images/download.jpg" alt="Semi-precious Stones">
               <div class="service-overlay">
                 <span>Collect</span>
               </div>
@@ -267,15 +274,378 @@
       </div>
     </section>
 
+    <!-- Coffee from Uganda Section -->
+    <section class="coffee-detail" id="coffee">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Our Specialty</span>
+          <h2 class="section-title">Coffee from Uganda</h2>
+          <p class="section-description">With over 5 years of expertise in the coffee industry, we bring you the finest African coffee beans.</p>
+        </div>
+        <div class="coffee-content">
+          <div class="coffee-text">
+            <div class="coffee-highlight">
+              <div class="highlight-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 8V4M8 6h8M16 18a4 4 0 0 0 4-4V8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a4 4 0 0 0 4 4h8z"/>
+                </svg>
+              </div>
+              <div>
+                <h3>5+ Years Experience</h3>
+                <p>We have been working in the coffee industry for more than 5 years. Our company deals in two types of coffee: Arabica and Robusta, and in all specialty coffees.</p>
+              </div>
+            </div>
+            <div class="coffee-highlight">
+              <div class="highlight-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 12h8M12 8v8"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Arabica & Robusta</h3>
+                <p>Specializing in both premium Arabica beans for smooth flavor and Robusta for rich, strong character, ensuring the best coffee experience.</p>
+              </div>
+            </div>
+            <div class="coffee-highlight">
+              <div class="highlight-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12a9 9 0 0 1-9 9M3 12a9 9 0 0 0 9 9M12 3v18"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Global Reach</h3>
+                <p>We cater to a diverse set of clients from USA, South Africa, Egypt, Turkey, Sudan, United Arab Emirates, Iran and are committed to ensuring that our customers consistently get the best coffee the world has to offer.</p>
+              </div>
+            </div>
+            <div class="coffee-highlight">
+              <div class="highlight-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Direct Partnership</h3>
+                <p>Our dedicated team of experts work closely with coffee farmers in various areas of Uganda to ensure quality and sustainability.</p>
+              </div>
+            </div>
+          </div>
+          <div class="coffee-visual">
+            <div class="coffee-image">
+              <img src="imageS/Gallery/coffee/AGH_Coffee_01.jpg" alt="Uganda Coffee Beans">
+            </div>
+            <div class="export-countries">
+              <h4>Export Countries</h4>
+              <div class="country-grid">
+                <span class="country-tag">🇺🇸 USA</span>
+                <span class="country-tag">🇿🇦 South Africa</span>
+                <span class="country-tag">🇪🇬 Egypt</span>
+                <span class="country-tag">🇹🇷 Turkey</span>
+                <span class="country-tag">🇸🇩 Sudan</span>
+                <span class="country-tag">🇦🇪 UAE</span>
+                <span class="country-tag">🇮🇷 Iran</span>
+                <span class="country-tag">🇪🇺 Europe</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artist Section -->
+    <section class="artist-section" id="artists">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Featured Artists</span>
+          <h2 class="section-title">Contemporary African Artists</h2>
+          <p class="section-description">Discover the vibrant world of contemporary African art through our curated selection of talented artists.</p>
+        </div>
+        <div class="artist-grid">
+          <!-- Artist 1 -->
+          <div class="artist-card" data-artist="1">
+            <div class="artist-image-wrapper">
+              <img src="imageS/Gallery/African-Artists/Alvin-Lungu/alvin3.jpg" alt="Kwame Abena" class="artist-image">
+              <div class="artist-overlay">
+                <span>View Profile</span>
+              </div>
+            </div>
+            <div class="artist-info">
+              <h3>Alvin Lungu </h3>
+              <p>​Alvin Lungu (born 1996) is a contemporary Zambian multidisciplinary artist based in Lusaka. He is an emerging figure in the African art scene, known for exploring complex themes of cultural identity, heritage, and the "inner vs. outer world." </p>
+              <button class="artist-button" data-artist="1">
+                <span>View Profile</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Artist 2 -->
+          <div class="artist-card" data-artist="2">
+            <div class="artist-image-wrapper">
+              <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi3.jpg" alt="Fatima Diallo" class="artist-image">
+              <div class="artist-overlay">
+                <span>View Profile</span>
+              </div>
+            </div>
+            <div class="artist-info">
+              <h3>Daudi-Yves-Magisha</h3>
+              <p>Often referred to as Daudi M. Yves is a contemporary visual artist based in Zambia with roots in the Democratic Republic of Congo. He is known for using a multidisciplinary approach—combining painting, drawing, and textiles—to explore deep social and personal themes.</p>
+              <button class="artist-button" data-artist="2">
+                <span>View Profile</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Artist 3 -->
+          <div class="artist-card" data-artist="3">
+            <div class="artist-image-wrapper">
+              <img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan7.JPG" alt="Chijioke Okoro" class="artist-image">
+              <div class="artist-overlay">
+                <span>View Profile</span>
+              </div>
+            </div>
+            <div class="artist-info">
+              <h3>Albert Oppan</h3>
+              <p>Albert Oppan is a Ghanaian contemporary artist based in the Sekondi-Takoradi area of the Western Region. He is primarily known for his vibrant, expressive paintings that capture the daily life, culture, and spirit of Ghana.</p>
+              <button class="artist-button" data-artist="3">
+                <span>View Profile</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artist Modals -->
+    <div class="artist-modal" id="artistModal1">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-content">
+          <button class="modal-close">&times;</button>
+          <div class="modal-header">
+            <h3>Alvin Lungu</h3>
+            <p class="modal-subtitle">Contemporary Painter • Ghana</p>
+          </div>
+          <div class="modal-body">
+            <div class="modal-info">
+              <div class="modal-section">
+                <h4>About the Artist</h4>
+                <p>Born in 1996, Alvin Lungu, is a Zambian multidisciplinary visual artist working in different artistic mediums, such as painting, sculpture, installation to express his creative vision. His work may involve a diverse range of materials and techniques, reflecting their exploration of cultural themes. He often explores the concept of cultural identity, examining the ways in which individuals and communities define themselves within a broader cultural context. Alvin draws his inspiration from his own heritage, traditions, and experiences, as well as explore the intersections of different cultures and their influences. Rites of passage are also a central theme in his work. Alvin explore rituals and ceremonies associated with important life transitions, such as birth, coming of age, marriage, or death. Through his artistic expression, he tries capture the symbolism, emotions, and significance of these rites, shedding light on their cultural and spiritual dimensions. Ancestral spirituality is another prominent theme in Lungu s work. He is mainly inspired from indigenous or traditional belief systems, myths, folklore, or ancestral wisdom to explore the connection between the past and present. Through his artistic creations, Alvin seeks to honor and preserve ancestral knowledge, highlight spiritual practices, and invite reflection on our relationship with the past and its influence on our lives.</p>
+              </div>
+              <div class="modal-section">
+                <h4>Style & Technique</h4>
+                <p>Bold color palettes, Palette knife Work and Focus on people.</p>
+              </div>
+              <div class="modal-section">
+                <h4>Recent Exhibitions</h4>
+                <ul>
+                  <li>Cynthia Zukas Young Artists Award (2024–2025)</li>
+                  <li>Lechwe Trust Art Gallery</li>
+                  <li>​G20 Exhibition / Latitude Center (2025)</li>
+                  <li>On Behalf Of..." (Nov 2025 – Jan 2026): Currently showing at Modzi Arts Gallery. This is an international collaborative exhibition exploring research-based art</li>
+                </ul>
+              </div>
+            </div>
+            <div class="modal-gallery">
+              <h4>Featured Works</h4>
+              <div class="gallery-grid"> 
+                <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Alvin-Lungu/alvin1.jpg" alt="alvin1"></div>
+                <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Alvin-Lungu/alvin2.jpg" alt="alvin2"></div>
+                <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Alvin-Lungu/alvin3.jpg" alt="alvin3"></div>
+                <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Alvin-Lungu/alvin4.jpg" alt="alvin4"></div>
+                <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Alvin-Lungu/alvin5.jpg" alt="alvin5"></div>
+                <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Alvin-Lungu/alvin6.jpg" alt="alvin6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-modal" id="artistModal2">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-content">
+          <button class="modal-close">&times;</button>
+          <div class="modal-header">
+            <h3>Daudi-Yves-Magisha</h3>
+            <p class="modal-subtitle">Visual artist • Zambia</p>
+          </div>
+          <div class="modal-body">
+            <div class="modal-info">
+              <div class="modal-section">
+                <h4>About the Artist</h4>
+                <p>Daudi Yves Magisha was born in 2000. Daudi Yves Magisha is a contemporary artist living and working in Zambia. He explores the link between mental health and creativity, as well as toxic masculinity and men’s emotions, using art as a means of self-reflection and a tool for change and inspiration. Through innovative conceptual drawings and paintings on paper and canvas, Daudi engages in multidisciplinary modes of art to address and find solutions to common issues affecting local and global communities. In his work, he uses painting and mixed media to explore themes of change, self-reflection, and enlightenment, drawing inspiration from the Masai tribe. Incorporating symbolic forms like open and closed boxes to represent open-mindedness and closed-mindedness, he challenges viewers to broaden their perspectives and treat themselves and others with compassion. His art addresses diverse topics such as growth, mental health, and societal issues, aiming to push viewers beyond their comfort zones and inspire positive change.</p>
+              </div>
+              <div class="modal-section">
+                <h4>Style & Technique</h4>
+                <p>Oil, charcoal, acrylics, and innovative materials.</p>
+              </div>
+              <div class="modal-section">
+                <h4>Recent Exhibitions</h4>
+                <ul>
+                  <li>Waste no Waste Trash is Treasure (Environmental Campaign 2024) / The Embassy of Italy</li>
+                  <li>STEPS OF HOPE solo Art Exhibition (Modzi Arts 2024)</li>
+                  <li>​G20 Exhibition / Latitude Center (2025)</li>
+                  <li>A Celebration of Zambia's Talent ART EXHIBITION (Sugar-bush Farm 2023)</li>
+                  <li>WORLD IN MOTION SOLO EXHIBITION (The Art Shop Zambia 2023)</li>
+                  <li>WORLD IN MOTION Deluxe SOLO EXHIBITION (Alliance Francoise de Lusaka 2023).</li>
+                  <li>AN ODE TO JOY THROUGH THE MIDST TO RESILIENCE group show LONDON, UK 2022</li>
+                  <li>Zambia art and design show 2021</li>
+                  <li>RANSITION Young Emerging Artist Exhibition (MWIMBI FINE ART GALLERY) 2021</li>
+                  <li>Zambia art and design show 2020</li>
+                  <li>The Cynthia Zukas Young Artist Awards 2020</li>
+                  <li>IFF group exhibition at UNZA 2020</li>
+                </ul>
+              </div>
+            </div>
+            <div class="modal-gallery">
+              <h4>Featured Works</h4>
+              <div class="gallery-grid">
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi1.jpg" alt="Daudi1"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi2.jpg" alt="Daudi2"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi3.jpg" alt="Daudi3"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi4.jpg" alt="Daudi4"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi5.jpg" alt="Daudi5"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi6.jpg" alt="Daudi6"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi7.jpg" alt="Daudi7"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi8.jpg" alt="Daudi8"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi11.jpg" alt="Daudi11"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi12.jpg" alt="Daudi12"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi13.jpg" alt="Daudi13"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi14.jpg" alt="Daudi14"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi15.jpg" alt="Daudi15"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi16.jpg" alt="Daudi16"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi17.jpg" alt="Daudi17"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi18.jpg" alt="Daudi18"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi19.jpg" alt="Daudi19"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi20.jpg" alt="Daudi20"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi21.jpg" alt="Daudi21"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi22.jpg" alt="Daudi22"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi23.jpg" alt="Daudi23"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi24.jpg" alt="Daudi24"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi25.jpg" alt="Daudi25"></mg>
+               </div>
+               <div class="gallery-item">
+                <img src="imageS/Gallery/African-Artists/Daudi-Yves-Magisha/Daudi26.jpg" alt="Daudi26"></mg>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-modal" id="artistModal3">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <div class="modal-content">
+          <button class="modal-close">&times;</button>
+          <div class="modal-header">
+            <h3>Albert-Oppan</h3>
+            <p class="modal-subtitle">Mixed Media Artist • Ghanaian </p>
+          </div>
+          <div class="modal-body">
+            <div class="modal-info">
+              <div class="modal-section">
+                <h4>About the Artist</h4>
+                <p>Born in Ghana, he happens to be a portrait artist. He has lived with it ever since he was a child. He went to Takoradi polytechnic to pursue fine art where he obtained his higher national diploma in painting. He decided to choose a pen as his medium of choice in executing realistic portrait drawings and he chose portrait art because of how best it portrays itself and the quality, it carries that is memorializing an image of someone and also not forgetting how it displays the mood and the personality of the person. He tried pursuing it more professionally by studying artist who are ahead of him.</p>
+              </div>
+              <div class="modal-section">
+                <h4>Style & Technique</h4>
+                <p> Bold Color Palette, Palette knife Work, Focus on people </p>
+              </div>
+              <div class="modal-section">
+                <h4>Recent Exhibitions</h4>
+                <ul>
+                  <li>​"The Gaze" (2025 Annual Juried Exhibition)</li>
+                  <li>​Takoradi Street Art Festival (Late 2024)</li>
+                  <li>​Albert Oppan Arts Solo Show Case (Ongoing 2025)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="modal-gallery">
+              <h4>Featured Works</h4>
+              <div class="gallery-grid">
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan1.jpeg" alt="oppan1"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan2.jpeg" alt="oppan2"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan3.jpeg" alt="oppan3"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan4.jpeg" alt="oppan4"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan5.jpeg" alt="oppan5"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan6.jpeg" alt="oppan6"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan7.jpg" alt="oppan7"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan8.jpeg" alt="oppan8"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan9.jpeg" alt="oppan9"></div>
+               <div class="gallery-item"><img src="imageS/Gallery/African-Artists/Albert-Oppan/oppan10.jpeg" alt="oppan10"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Mission Section -->
     <section class="mission" id="mission">
       <div class="container">
-        <div class="section-header reveal-up">
+        <div class="section-header">
           <span class="section-tag">Our Purpose</span>
           <h2 class="section-title">Our Mission</h2>
         </div>
         <div class="mission-grid">
-          <div class="mission-card reveal-up" style="--delay: 0s;">
+          <div class="mission-card">
             <div class="mission-number">01</div>
             <div class="mission-icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -287,7 +657,7 @@
             <h3>Trade & Investment</h3>
             <p>Facilitating meaningful economic partnerships that benefit communities on both continents through fair trade practices.</p>
           </div>
-          <div class="mission-card reveal-up" style="--delay: 0.15s;">
+          <div class="mission-card">
             <div class="mission-number">02</div>
             <div class="mission-icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -298,7 +668,7 @@
             <h3>Celebrating Diversity</h3>
             <p>Honoring and showcasing the unique cultural heritage of African and Georgian traditions through events and exhibitions.</p>
           </div>
-          <div class="mission-card reveal-up" style="--delay: 0.3s;">
+          <div class="mission-card">
             <div class="mission-number">03</div>
             <div class="mission-icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -316,8 +686,8 @@
     <section class="contact" id="contact">
       <div class="container">
         <div class="contact-wrapper">
-          <div class="contact-info reveal-left">
-            <span class="section-tag">Get In Touch</span>
+          <div class="contact-info">
+            <span class="section-tag" style="align-items: center;">Get In Touch</span>
             <h2 class="section-title">Let's Connect</h2>
             <p class="contact-description">Ready to explore opportunities or learn more about our services? We'd love to hear from you.</p>
             <div class="contact-details">
@@ -369,7 +739,7 @@
               </div>
             </div>
           </div>
-          <form class="contact-form reveal-right" id="contactForm">
+          <form class="contact-form" id="contactForm">
             <div class="form-group">
               <label for="name">Full Name</label>
               <input type="text" id="name" name="name" required placeholder="Your name">
@@ -384,6 +754,8 @@
                 <option value="">Select a topic</option>
                 <option value="safari">Safari Tours</option>
                 <option value="products">Products Inquiry</option>
+                <option value="coffee">Coffee Export</option>
+                <option value="art">Art & Artists</option>
                 <option value="partnership">Partnership</option>
                 <option value="cultural">Cultural Events</option>
                 <option value="other">Other</option>
@@ -393,12 +765,21 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" rows="4" required placeholder="Tell us about your inquiry..."></textarea>
             </div>
+            
+            <!-- Form Submission Feedback -->
+            <div class="form-feedback" id="formFeedback"></div>
+            
             <button type="submit" class="btn btn-primary btn-full">
               <span>Send Message</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/>
               </svg>
             </button>
+            
+            <!-- Data Reception Solution Notice -->
+            <div class="form-notice">
+              <p><small>Form data will be sent to african-georgianhouse@gmail.com and stored securely for follow-up. You'll receive a confirmation email within 24 hours.</small></p>
+            </div>
           </form>
         </div>
       </div>
@@ -425,6 +806,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#artists">Artists</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -433,8 +815,8 @@
           <ul>
             <li><a href="#services">African Safaris</a></li>
             <li><a href="#services">Handicrafts</a></li>
-            <li><a href="#services">Artworks</a></li>
-            <li><a href="#services">Coffee</a></li>
+            <li><a href="#coffee">Premium Coffee</a></li>
+            <li><a href="#artists">Artworks</a></li>
           </ul>
         </div>
         <div class="footer-contact">
@@ -450,6 +832,7 @@
     </div>
   </footer>
 
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>

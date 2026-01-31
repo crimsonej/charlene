@@ -1,259 +1,633 @@
-// ===== Welcome Overlay =====
+// Main initialization
 document.addEventListener('DOMContentLoaded', function() {
-  const welcomeOverlay = document.getElementById('welcomeOverlay');
-  const enterButton = document.getElementById('enterSite');
-  const mainContent = document.getElementById('mainContent');
+  initHeaderScroll();
+  initSmoothScroll();
+  initArtistModals();
+  initContactForm();
+  initMobileMenu();
+  initCounterAnimation();
+  initScrollAnimations();
+});
+
+// Header scroll effect
+function initHeaderScroll() {
   const header = document.getElementById('header');
+  const navLogo = document.querySelector('.nav-logo');
+  const heroLogo = document.querySelector('.hero-logo');
   
-  // Hide main content initially
-  if (mainContent) {
-    mainContent.style.opacity = '0';
-  }
-  if (header) {
-    header.style.opacity = '0';
-  }
-  
-  // Enter site on button click
-  enterButton.addEventListener('click', function() {
-    welcomeOverlay.classList.add('hidden');
-    document.body.classList.remove('no-scroll');
+  window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY;
+    const heroHeight = document.querySelector('.hero').offsetHeight;
     
-    // Fade in main content
-    setTimeout(function() {
-      if (mainContent) {
-        mainContent.style.transition = 'opacity 0.8s ease';
-        mainContent.style.opacity = '1';
-      }
-      if (header) {
-        header.style.transition = 'opacity 0.6s ease';
-        header.style.opacity = '1';
-      }
+    // Add scrolled class to header
+    if (scrollPosition > 100) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    // Scale hero logo as user scrolls
+    if (heroLogo) {
+      const scale = Math.max(0.4, 1 - (scrollPosition / heroHeight * 0.6));
+      const opacity = Math.max(0, 1 - (scrollPosition / heroHeight * 2));
       
-      // Trigger initial reveal animations
-      setTimeout(revealElements, 300);
+      heroLogo.style.transform = `scale(${scale})`;
+      heroLogo.style.opacity = opacity;
+    }
+    
+    // Show nav logo after scrolling past hero
+    if (scrollPosition > heroHeight * 0.7) {
+      navLogo.style.opacity = '1';
+      navLogo.style.transform = 'translateY(0)';
+    } else {
+      navLogo.style.opacity = '0';
+      navLogo.style.transform = 'translateY(-20px)';
+    }
+  });
+}
+
+// Smooth scroll for anchor links
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
       
-      // Start counting animation
-      animateCounters();
-    }, 400);
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        
+        // Calculate header height
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Update active nav link
+        updateActiveNavLink(targetId);
+      }
+    });
   });
   
-  // Allow pressing Enter to enter site
+  function updateActiveNavLink(targetId) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === targetId) {
+        link.classList.add('active');
+      }
+    });
+  }
+}
+
+// Artist modals
+function initArtistModals() {
+  const artistCards = document.querySelectorAll('.artist-card, .artist-button');
+  const modals = document.querySelectorAll('.artist-modal');
+  const closeButtons = document.querySelectorAll('.modal-close');
+  
+  // Open modal
+  artistCards.forEach(element => {
+    element.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const artistId = this.getAttribute('data-artist');
+      const modal = document.getElementById(`artistModal${artistId}`);
+      
+      if (modal) {
+        openModal(modal);
+      }
+    });
+  });
+  
+  // Close modal
+  closeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const modal = this.closest('.artist-modal');
+      closeModal(modal);
+    });
+  });
+  
+  // Close on overlay click
+  modals.forEach(modal => {
+    modal.querySelector('.modal-overlay').addEventListener('click', function() {
+      closeModal(modal);
+    });
+  });
+  
+  // Close on Escape key
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && !welcomeOverlay.classList.contains('hidden')) {
-      enterButton.click();
+    if (e.key === 'Escape') {
+      modals.forEach(modal => {
+        if (modal.classList.contains('active')) {
+          closeModal(modal);
+        }
+      });
     }
   });
   
-  // Set initial state
-  document.body.classList.add('no-scroll');
-});
+  function openModal(modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Add animation class to modal container
+    setTimeout(() => {
+      modal.querySelector('.modal-container').style.transform = 'translate(-50%, -50%) scale(1)';
+      modal.querySelector('.modal-container').style.opacity = '1';
+    }, 10);
+  }
+  
+  function closeModal(modal) {
+    modal.querySelector('.modal-container').style.transform = 'translate(-50%, -50%) scale(0.9)';
+    modal.querySelector('.modal-container').style.opacity = '0';
+    
+    setTimeout(() => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }, 400);
+  }
+}
 
-// ===== Mobile Menu =====
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
+// Contact form
+function initContactForm() {
+  const contactForm = document.getElementById('contactForm');
+  const formFeedback = document.getElementById('formFeedback');
+  
+  if (!contactForm) return;
+  
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    // Show loading state
+    const submitButton = this.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
+    submitButton.innerHTML = '<span>Sending...</span>';
+    submitButton.disabled = true;
+    
+    // Simulate form submission
+    setTimeout(() => {
+      // In production, this would be an actual API call
+      // For demo purposes, we'll simulate success
+      const isSuccess = Math.random() > 0.2; // 80% success rate for demo
+      
+      if (isSuccess) {
+        // Success feedback
+        formFeedback.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.';
+        formFeedback.className = 'form-feedback success';
+        
+        // Clear form
+        contactForm.reset();
+        
+        // Log data (in production, this would go to your server)
+        console.log('Contact form data received:', data);
+        console.log(`
+          DATA RECEPTION SOLUTION:
+          -------------------------
+          To handle form submissions in production:
+          1. Create a server endpoint (e.g., /api/contact)
+          2. Send data via fetch/axios
+          3. Store in database and/or forward to email
+          4. Recommended services: Formspree, Netlify Forms, or custom backend
+          
+          Example using Formspree:
+          - Change form action to: action="https://formspree.io/f/YOUR_FORM_ID"
+          - Add method="POST"
+          - Formspree will forward submissions to your email
+        `);
+      } else {
+        // Error feedback
+        formFeedback.textContent = 'Something went wrong. Please try again or contact us directly at african-georgianhouse@gmail.com';
+        formFeedback.className = 'form-feedback error';
+      }
+      
+      // Reset button
+      submitButton.innerHTML = originalText;
+      submitButton.disabled = false;
+      
+      // Hide feedback after 5 seconds
+      setTimeout(() => {
+        formFeedback.style.opacity = '0';
+        setTimeout(() => {
+          formFeedback.className = 'form-feedback';
+          formFeedback.style.opacity = '1';
+          formFeedback.textContent = '';
+        }, 500);
+      }, 5000);
+    }, 1500);
+  });
+}
 
-if (mobileMenuBtn && navLinks) {
+// Mobile menu
+function initMobileMenu() {
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+  
+  if (!mobileMenuBtn || !navLinks) return;
+  
   mobileMenuBtn.addEventListener('click', function() {
     this.classList.toggle('active');
     navLinks.classList.toggle('open');
   });
   
-  // Close menu when clicking a link
-  navLinks.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
+  // Close menu when clicking on a link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
       mobileMenuBtn.classList.remove('active');
       navLinks.classList.remove('open');
     });
   });
 }
 
-// ===== Header Scroll Effect =====
-const header = document.getElementById('header');
-let lastScroll = 0;
-
-window.addEventListener('scroll', function() {
-  const currentScroll = window.pageYOffset;
+// Animated counter
+function initCounterAnimation() {
+  const counters = document.querySelectorAll('.stat-number');
   
-  if (currentScroll > 100) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
+  if (counters.length === 0) return;
+  
+  let hasAnimated = false;
+  
+  function startCounters() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-count'));
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      
+      let current = 0;
+      const timer = setInterval(() => {
+        current += increment;
+        
+        if (current >= target) {
+          counter.textContent = target;
+          clearInterval(timer);
+        } else {
+          counter.textContent = Math.floor(current);
+        }
+      }, 16);
+    });
   }
   
-  lastScroll = currentScroll;
+  // Start when stats come into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        startCounters();
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) observer.observe(heroStats);
+}
+
+// Scroll animations for sections
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all cards for animation
+  document.querySelectorAll('.about-card, .service-card, .coffee-highlight, .artist-card, .mission-card').forEach(card => {
+    observer.observe(card);
+  });
+}
+
+// Initialize everything
+console.log('African-Georgian House website initialized successfully!');
+
+// Main initialization
+document.addEventListener('DOMContentLoaded', function() {
+  initHeaderScroll();
+  initSmoothScroll();
+  initArtistModals();
+  initContactForm();
+  initMobileMenu();
+  initCounterAnimation();
+  initScrollAnimations();
 });
 
-// ===== Active Nav Link =====
-const sections = document.querySelectorAll('section[id]');
-const navLinksAll = document.querySelectorAll('.nav-link');
-
-function updateActiveLink() {
-  const scrollY = window.pageYOffset;
+// Header scroll effect
+function initHeaderScroll() {
+  const header = document.getElementById('header');
+  const navLogo = document.querySelector('.nav-logo');
+  const heroLogo = document.querySelector('.hero-logo');
   
-  sections.forEach(function(section) {
-    const sectionHeight = section.offsetHeight;
-    const sectionTop = section.offsetTop - 150;
-    const sectionId = section.getAttribute('id');
+  window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY;
+    const heroHeight = document.querySelector('.hero').offsetHeight;
     
-    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-      navLinksAll.forEach(function(link) {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + sectionId) {
-          link.classList.add('active');
+    // Add scrolled class to header
+    if (scrollPosition > 100) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    // Scale hero logo as user scrolls
+    if (heroLogo) {
+      const scale = Math.max(0.4, 1 - (scrollPosition / heroHeight * 0.6));
+      const opacity = Math.max(0, 1 - (scrollPosition / heroHeight * 2));
+      
+      heroLogo.style.transform = `scale(${scale})`;
+      heroLogo.style.opacity = opacity;
+    }
+    
+    // Show nav logo after scrolling past hero
+    if (scrollPosition > heroHeight * 0.7) {
+      navLogo.style.opacity = '1';
+      navLogo.style.transform = 'translateY(0)';
+    } else {
+      navLogo.style.opacity = '0';
+      navLogo.style.transform = 'translateY(-20px)';
+    }
+  });
+}
+
+// Smooth scroll for anchor links
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        
+        // Calculate header height
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Update active nav link
+        updateActiveNavLink(targetId);
+      }
+    });
+  });
+  
+  function updateActiveNavLink(targetId) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === targetId) {
+        link.classList.add('active');
+      }
+    });
+  }
+}
+
+// Artist modals
+function initArtistModals() {
+  const artistCards = document.querySelectorAll('.artist-card, .artist-button');
+  const modals = document.querySelectorAll('.artist-modal');
+  const closeButtons = document.querySelectorAll('.modal-close');
+  
+  // Open modal
+  artistCards.forEach(element => {
+    element.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const artistId = this.getAttribute('data-artist');
+      const modal = document.getElementById(`artistModal${artistId}`);
+      
+      if (modal) {
+        openModal(modal);
+      }
+    });
+  });
+  
+  // Close modal
+  closeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const modal = this.closest('.artist-modal');
+      closeModal(modal);
+    });
+  });
+  
+  // Close on overlay click
+  modals.forEach(modal => {
+    modal.querySelector('.modal-overlay').addEventListener('click', function() {
+      closeModal(modal);
+    });
+  });
+  
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      modals.forEach(modal => {
+        if (modal.classList.contains('active')) {
+          closeModal(modal);
         }
       });
     }
   });
-}
-
-window.addEventListener('scroll', updateActiveLink);
-
-// ===== Scroll Reveal Animation =====
-function revealElements() {
-  const reveals = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
-  const windowHeight = window.innerHeight;
   
-  reveals.forEach(function(element) {
-    const elementTop = element.getBoundingClientRect().top;
-    const revealPoint = 100;
+  function openModal(modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
     
-    if (elementTop < windowHeight - revealPoint) {
-      element.classList.add('revealed');
-    }
-  });
-}
-
-window.addEventListener('scroll', revealElements);
-
-// ===== Counter Animation =====
-function animateCounters() {
-  const counters = document.querySelectorAll('.stat-number');
+    // Add animation class to modal container
+    setTimeout(() => {
+      modal.querySelector('.modal-container').style.transform = 'translate(-50%, -50%) scale(1)';
+      modal.querySelector('.modal-container').style.opacity = '1';
+    }, 10);
+  }
   
-  counters.forEach(function(counter) {
-    const target = parseInt(counter.getAttribute('data-count'));
-    const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
+  function closeModal(modal) {
+    modal.querySelector('.modal-container').style.transform = 'translate(-50%, -50%) scale(0.9)';
+    modal.querySelector('.modal-container').style.opacity = '0';
     
-    function updateCounter() {
-      current += step;
-      if (current < target) {
-        counter.textContent = Math.floor(current);
-        requestAnimationFrame(updateCounter);
-      } else {
-        counter.textContent = target + '+';
-      }
-    }
-    
-    updateCounter();
-  });
+    setTimeout(() => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }, 400);
+  }
 }
 
-// ===== Smooth Scroll =====
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href');
-    
-    if (targetId === '#') return;
-    
-    const target = document.querySelector(targetId);
-    if (target) {
-      const headerHeight = document.querySelector('.header').offsetHeight;
-      const targetPosition = target.offsetTop - headerHeight;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-
-// ===== Contact Form =====
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
+// Contact form
+function initContactForm() {
+  const contactForm = document.getElementById('contactForm');
+  const formFeedback = document.getElementById('formFeedback');
+  
+  if (!contactForm) return;
+  
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
+    // Get form data
     const formData = new FormData(this);
-    const data = {};
-    formData.forEach(function(value, key) {
-      data[key] = value;
-    });
+    const data = Object.fromEntries(formData);
     
-    // Show success message (you can replace this with actual form submission)
-    const button = this.querySelector('button[type="submit"]');
-    const originalText = button.innerHTML;
+    // Show loading state
+    const submitButton = this.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
+    submitButton.innerHTML = '<span>Sending...</span>';
+    submitButton.disabled = true;
     
-    button.innerHTML = '<span>Message Sent!</span>';
-    button.style.background = '#25D366';
-    button.disabled = true;
-    
-    setTimeout(function() {
-      button.innerHTML = originalText;
-      button.style.background = '';
-      button.disabled = false;
-      contactForm.reset();
-    }, 3000);
-    
-    console.log('Form submitted:', data);
+    // Simulate form submission
+    setTimeout(() => {
+      // In production, this would be an actual API call
+      // For demo purposes, we'll simulate success
+      const isSuccess = Math.random() > 0.2; // 80% success rate for demo
+      
+      if (isSuccess) {
+        // Success feedback
+        formFeedback.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.';
+        formFeedback.className = 'form-feedback success';
+        
+        // Clear form
+        contactForm.reset();
+        
+        // Log data (in production, this would go to your server)
+        console.log('Contact form data received:', data);
+        console.log(`
+          DATA RECEPTION SOLUTION:
+          -------------------------
+          To handle form submissions in production:
+          1. Create a server endpoint (e.g., /api/contact)
+          2. Send data via fetch/axios
+          3. Store in database and/or forward to email
+          4. Recommended services: Formspree, Netlify Forms, or custom backend
+          
+          Example using Formspree:
+          - Change form action to: action="https://formspree.io/f/YOUR_FORM_ID"
+          - Add method="POST"
+          - Formspree will forward submissions to your email
+        `);
+      } else {
+        // Error feedback
+        formFeedback.textContent = 'Something went wrong. Please try again or contact us directly at african-georgianhouse@gmail.com';
+        formFeedback.className = 'form-feedback error';
+      }
+      
+      // Reset button
+      submitButton.innerHTML = originalText;
+      submitButton.disabled = false;
+      
+      // Hide feedback after 5 seconds
+      setTimeout(() => {
+        formFeedback.style.opacity = '0';
+        setTimeout(() => {
+          formFeedback.className = 'form-feedback';
+          formFeedback.style.opacity = '1';
+          formFeedback.textContent = '';
+        }, 500);
+      }, 5000);
+    }, 1500);
   });
 }
 
-// ===== Image Parallax Effect =====
-const heroImage = document.querySelector('.hero-image');
-
-if (heroImage) {
-  window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const parallaxSpeed = 0.3;
-    
-    if (scrolled < window.innerHeight) {
-      heroImage.style.transform = 'scale(1.1) translateY(' + (scrolled * parallaxSpeed) + 'px)';
-    }
-  });
-}
-
-// ===== Service Card Tilt Effect =====
-const serviceCards = document.querySelectorAll('.service-card');
-
-serviceCards.forEach(function(card) {
-  card.addEventListener('mousemove', function(e) {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-    
-    card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-8px)';
+// Mobile menu
+function initMobileMenu() {
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+  
+  if (!mobileMenuBtn || !navLinks) return;
+  
+  mobileMenuBtn.addEventListener('click', function() {
+    this.classList.toggle('active');
+    navLinks.classList.toggle('open');
   });
   
-  card.addEventListener('mouseleave', function() {
-    card.style.transform = '';
+  // Close menu when clicking on a link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuBtn.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
   });
-});
+}
 
-// ===== Intersection Observer for lazy animations =====
-const observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1
-};
+// Animated counter
+function initCounterAnimation() {
+  const counters = document.querySelectorAll('.stat-number');
+  
+  if (counters.length === 0) return;
+  
+  let hasAnimated = false;
+  
+  function startCounters() {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-count'));
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      
+      let current = 0;
+      const timer = setInterval(() => {
+        current += increment;
+        
+        if (current >= target) {
+          counter.textContent = target;
+          clearInterval(timer);
+        } else {
+          counter.textContent = Math.floor(current);
+        }
+      }, 16);
+    });
+  }
+  
+  // Start when stats come into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        startCounters();
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) observer.observe(heroStats);
+}
 
-const observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-    }
+// Scroll animations for sections
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all cards for animation
+  document.querySelectorAll('.about-card, .service-card, .coffee-highlight, .artist-card, .mission-card').forEach(card => {
+    observer.observe(card);
   });
-}, observerOptions);
+}
 
-document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(function(el) {
-  observer.observe(el);
-});
+// Initialize everything
+console.log('African-Georgian House website initialized successfully!');
